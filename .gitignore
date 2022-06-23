@@ -1,0 +1,38 @@
+# project files
+/**/labextension/
+
+# javascript/typescript
+lib
+node_modules
+
+*.tsbuildinfo
+
+# python
+.cache
+*.py[co]
+.pytest_cache
+__pycache__
+*.egg-info
+.ipynb_checkpoints
+
+MANIFEST
+
+# misc
+*~
+*.bak
+*.map
+*.swp
+.DS_Store
+.log/
+\#*#
+.#*
+
+*.swp
+*.map
+
+# ms IDE stuff
+*.code-workspace
+.history
+.vscode/settings.json
+
+.jupyter_releaser_checkout
