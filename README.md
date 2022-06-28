@@ -12,16 +12,8 @@ Compared to the official [jupyterlab-mathjax3](https://github.com/jupyterlab/jup
 
 ## Install
 
-```bash
-git clone https://github.com/chunxy/jupyterlab-mathjax3-web.git
-cd jupyterlab-mathjax3-web
-pip install ./
-```
-
-## Uninstall
-
-```
-pip uninstall juyterlab-mathjax3-web
+```shell
+pip install jupyterlab-mathjax3-web
 ```
 
 ## Contributing
@@ -32,7 +24,7 @@ Note: You will need NodeJS to build the extension package.
 
 The `jlpm` command is JupyterLab's pinned version of [yarn](https://yarnpkg.com/) that is installed with JupyterLab. You may use `yarn` or `npm` in lieu of `jlpm` below.
 
-```bash
+```shell
 # Clone the repo to your local environment
 # Change directory to the jupyterlab-mathjax3-web directory
 # Install package in development mode
@@ -45,7 +37,7 @@ jlpm run build
 
 You can watch the source directory and run JupyterLab at the same time in different terminals to watch for changes in the extension's source and automatically rebuild the extension.
 
-```bash
+```shell
 # Watch the source directory in one terminal, automatically rebuilding when needed
 jlpm run watch
 # Run JupyterLab in another terminal
@@ -56,19 +48,19 @@ With the watch command running, every saved change will immediately be built loc
 
 By default, the `jlpm run build` command generates the source maps for this extension to make it easier to debug using the browser dev tools. To also generate source maps for the JupyterLab core extensions, you can run the following command:
 
-```bash
+```shell
 jupyter lab build --minimize=False
 ```
 
 ### Development uninstall
 
-```bash
+```shell
 pip uninstall jupyterlab-mathjax3-web
 ```
 
 Then you need to manually remove the `labextension` because it seems that the above won't remove these JupyterLab files:
 
-```bash
+```shell
 cd PYTHON_ENV/share/jupyter/labextensions
 rm jupyterlab-mathjax3-web -rf
 ```

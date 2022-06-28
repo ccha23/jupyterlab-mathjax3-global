@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-mathjax3-web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MathJax 3 math renderer for JupyterLab",
   "keywords": [
     "jupyter",
