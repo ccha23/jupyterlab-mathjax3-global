@@ -1,5 +1,5 @@
 {
-  "name": "jupyterlab-mathjax3-global",
+  "name": "jupyterlab-mathjax3-web",
   "version": "0.0.1",
   "description": "MathJax 3 math renderer for JupyterLab",
   "keywords": [
@@ -7,9 +7,9 @@
     "jupyterlab",
     "mathjax"
   ],
-  "homepage": "https://github.com/chunxy/jupyterlab-mathjax3-global.git",
+  "homepage": "https://github.com/chunxy/jupyterlab-mathjax3-web.git",
   "bugs": {
-    "url": "https://github.com/chunxy/jupyterlab-mathjax3-global.git/issues"
+    "url": "https://github.com/chunxy/jupyterlab-mathjax3-web.git/issues"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "clean": "jlpm run clean:lib",
     "clean:all": "jlpm run clean:lib && jlpm run clean:labextension && jlpm run clean:dist",
     "clean:dist": "rimraf dist",
-    "clean:labextension": "rimraf ./jupyterlab-mathjax3-global/labextension",
+    "clean:labextension": "rimraf ./jupyterlab-mathjax3-web/labextension",
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "eslint:check": "eslint . --ext .ts,.tsx",
@@ -63,7 +63,7 @@
   },
   "jupyterlab": {
     "extension": true,
-    "outputDir": "jupyterlab-mathjax3-global/labextension",
+    "outputDir": "jupyterlab-mathjax3-web/labextension",
     "disabledExtensions": [
       "@jupyterlab/mathjax2-extension:plugin"
     ]

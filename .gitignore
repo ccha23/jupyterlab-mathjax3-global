@@ -1,5 +1,6 @@
 # project files
 /**/labextension/
+dist
 
 # javascript/typescript
 lib
@@ -33,6 +34,6 @@ MANIFEST
 # ms IDE stuff
 *.code-workspace
 .history
-.vscode/settings.json
+.vscode
 
 .jupyter_releaser_checkout

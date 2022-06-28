@@ -1,10 +1,10 @@
-# jupyterlab-mathjax3-global
+# jupyterlab-mathjax3-web
 
-A JupyterLab extension for rendering math with [MathJax 3](https://github.com/mathjax/mathjax).
+A JupyterLab extension for rendering math with MathJax 3.
 
-The default LaTeX renderer in JupyterLab uses [MathJax 2](https://www.mathjax.org/). This extension substitutes the MathJax 2 renderer with the MathJax 3 renderer. 
+The default LaTeX renderer in JupyterLab uses MathJax 2. This extension substitutes the MathJax 2 renderer with the MathJax 3 renderer. 
 
-Compared to the official [jupyterlab-mathjax3](https://github.com/jupyterlab/jupyter-renderers/tree/master/packages/mathjax3-extension), this extension exposes the MathJax 3 to the browser's global environment , so that other extensions may also use the MathJax 3.
+Compared to the official [jupyterlab-mathjax3](https://github.com/jupyterlab/jupyter-renderers/tree/master/packages/mathjax3-extension) which introduces the MathJax 3 into JupyterLab via **node** and **webpack**, this extension introduces MathJax 3 to the browser's global environment by loading script from the **web**, so that MathJax 3 can be used by other entities in JupyterLab like our [jsxgraph-magic](https://github.com/chunxy/jsxgraph-magic.git).
 
 ## Requirements
 
@@ -13,15 +13,15 @@ Compared to the official [jupyterlab-mathjax3](https://github.com/jupyterlab/jup
 ## Install
 
 ```bash
-git clone https://github.com/chunxy/jupyterlab-mathjax3-global.git
-cd jupyterlab-mathjax3-global
+git clone https://github.com/chunxy/jupyterlab-mathjax3-web.git
+cd jupyterlab-mathjax3-web
 pip install ./
 ```
 
 ## Uninstall
 
 ```
-pip uninstall juyterlab-mathjax3-global
+pip uninstall juyterlab-mathjax3-web
 ```
 
 ## Contributing
@@ -30,13 +30,11 @@ pip uninstall juyterlab-mathjax3-global
 
 Note: You will need NodeJS to build the extension package.
 
-The `jlpm` command is JupyterLab's pinned version of
-[yarn](https://yarnpkg.com/) that is installed with JupyterLab. You may use
-`yarn` or `npm` in lieu of `jlpm` below.
+The `jlpm` command is JupyterLab's pinned version of [yarn](https://yarnpkg.com/) that is installed with JupyterLab. You may use `yarn` or `npm` in lieu of `jlpm` below.
 
 ```bash
 # Clone the repo to your local environment
-# Change directory to the jupyterlab-mathjax3-global directory
+# Change directory to the jupyterlab-mathjax3-web directory
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab
@@ -65,14 +63,14 @@ jupyter lab build --minimize=False
 ### Development uninstall
 
 ```bash
-pip uninstall jupyterlab-mathjax3-global
+pip uninstall jupyterlab-mathjax3-web
 ```
 
-Then you need to manually remove the `labextension` because the development uninstall won't remove these extra files:
+Then you need to manually remove the `labextension` because it seems that the above won't remove these JupyterLab files:
 
 ```bash
 cd PYTHON_ENV/share/jupyter/labextensions
-rm jupyterlab-mathjax3-global -rf
+rm jupyterlab-mathjax3-web -rf
 ```
 
 where `PYTHON_ENV` should be expanded to your Python environment.
