@@ -1,19 +1,19 @@
 {
   "name": "jupyterlab-mathjax3-web",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MathJax 3 math renderer for JupyterLab",
   "keywords": [
     "jupyter",
     "jupyterlab",
     "mathjax"
   ],
-  "homepage": "https://github.com/chunxy/jupyterlab-mathjax3-web.git",
+  "homepage": "https://github.com/chunxy/jupyterlab-mathjax3-web",
   "bugs": {
-    "url": "https://github.com/chunxy/jupyterlab-mathjax3-web.git/issues"
+    "url": "https://github.com/chunxy/jupyterlab-mathjax3-web/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chunxy/jupyterlab-mathjax3.global"
+    "url": "https://github.com/chunxy/jupyterlab-mathjax3-web.git"
   },
   "license": "BSD-3-Clause",
   "author": {
@@ -65,7 +65,8 @@
     "extension": true,
     "outputDir": "jupyterlab-mathjax3-web/labextension",
     "disabledExtensions": [
-      "@jupyterlab/mathjax2-extension:plugin"
+      "@jupyterlab/mathjax2-extension:plugin",
+      "@jupyterlab/mathjax3-extension:plugin"
     ]
   },
   "styleModule": "style/index.js"

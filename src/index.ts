@@ -12,13 +12,14 @@ declare let window: any;
  */
 export class MathJax3Typesetter implements ILatexTypesetter {
 
+  constructor() {
+    this._init();
+  }
+
   /**
    * Typeset the math in a node.
    */
   typeset(node: HTMLElement): void {
-    if (!this._initialized) {
-      this._init();
-    }
 
     void this._initPromise.promise.then(() => window.MathJax.typesetPromise([node]));
   }
@@ -49,11 +50,8 @@ export class MathJax3Typesetter implements ILatexTypesetter {
       this._initPromise.resolve();
     });
     head.appendChild(script);
-    // this._initPromise.resolve(void 0);
-    this._initialized = true;
   }
 
-  private _initialized = false;
   private _initPromise = new PromiseDelegate<void>();
   private _url = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
 }

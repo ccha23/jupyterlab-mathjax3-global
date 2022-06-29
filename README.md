@@ -66,3 +66,7 @@ rm jupyterlab-mathjax3-web -rf
 ```
 
 where `PYTHON_ENV` should be expanded to your Python environment.
+
+## Note
+
+This JupyterLab extension will disable the official MathJax 2 and MathJax 3 extension to avoid potential conflict.
