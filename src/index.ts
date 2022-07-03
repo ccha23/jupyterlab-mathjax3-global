@@ -1,9 +1,15 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { JupyterFrontEndPlugin } from '@jupyterlab/application';
+import { JupyterFrontEndPlugin, JupyterFrontEnd } from '@jupyterlab/application';
 import { ILatexTypesetter } from '@jupyterlab/rendermime';
-import { PromiseDelegate } from '@lumino/coreutils';
+
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
+import { ICommandPalette } from '@jupyterlab/apputils';
+import { IMainMenu } from '@jupyterlab/mainmenu';
+import { PromiseDelegate, ReadonlyPartialJSONObject } from '@lumino/coreutils';
+
+import { Setting } from './setting'
 
 declare let window: any;
 
@@ -12,36 +18,31 @@ declare let window: any;
  */
 export class MathJax3Typesetter implements ILatexTypesetter {
 
-  constructor() {
-    this._init();
-  }
+  /**
+   * Only open the tex config access to the users.
+   */
+  private _texConfig: ReadonlyPartialJSONObject = null;
+  private _initPromise = new PromiseDelegate<void>();
+  private _url = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
 
   /**
    * Typeset the math in a node.
    */
-  typeset(node: HTMLElement): void {
-
+  public typeset(node: HTMLElement): void {
     void this._initPromise.promise.then(() => window.MathJax.typesetPromise([node]));
   }
 
-  private _init() {
+  set config(config: ReadonlyPartialJSONObject) {
+    this._texConfig = config;
+  }
+
+  public load() {
     window.MathJax = {
-      tex: {
-        inlineMath: [
-          ['$', '$'],
-          ['\\(', '\\)']
-        ],
-        displayMath: [
-          ['$$', '$$'],
-          ['\\[', '\\]']
-        ],
-        processEscapes: true,
-        processEnvironments: true
-      },
       startup: {
         typeset: false
       }
     };
+    window.MathJax.tex = this._texConfig;
     const head = document.getElementsByTagName('head')[0];
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -51,20 +52,54 @@ export class MathJax3Typesetter implements ILatexTypesetter {
     });
     head.appendChild(script);
   }
-
-  private _initPromise = new PromiseDelegate<void>();
-  private _url = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
 }
 
 /**
  * The MathJax 3 extension.
  */
-const mathJax3Plugin: JupyterFrontEndPlugin<ILatexTypesetter> = {
+const Mathjax3Plugin: JupyterFrontEndPlugin<ILatexTypesetter> = {
   id: 'jupyterlab-mathjax3-web:plugin',
-  requires: [],
+  requires: [ISettingRegistry, ICommandPalette, IMainMenu],
   provides: ILatexTypesetter,
-  activate: () => new MathJax3Typesetter(),
   autoStart: true,
+
+  activate: async (
+    app: JupyterFrontEnd,
+    settings: ISettingRegistry,
+    palette: ICommandPalette,
+    menu: IMainMenu
+  ) => {
+    const { commands } = app;
+    let plugin = new MathJax3Typesetter();
+
+    await settings
+      .load(Mathjax3Plugin.id)
+      .then(setting => {
+        plugin.config = setting.composite;
+      })
+      .catch(console.warn);
+
+    commands.addCommand(Setting.editConfig, {
+      label: 'Mathjax 3 Config...',
+      execute: args => {
+        commands.execute('settingeditor:open');
+      }
+    })
+
+    // Settings menu
+    menu.settingsMenu.addGroup([
+      { command: Setting.editConfig }
+    ], 50)
+
+    // Palatte entry
+    palette.addItem({
+      command: Setting.editConfig,
+      category: Setting.category
+    });
+
+    plugin.load();
+    return plugin;
+  }
 };
 
-export default mathJax3Plugin;
+export default Mathjax3Plugin;

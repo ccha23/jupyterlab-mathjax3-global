@@ -53,7 +53,11 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^3.2.8",
-    "@jupyterlab/rendermime": "^3.2.8"
+    "@jupyterlab/rendermime": "^3.2.8",
+    "@jupyterlab/settingregistry": "^3.0.0",
+    "@jupyterlab/apputils": "^3.0.0",
+    "@jupyterlab/mainmenu": "^3.0.0",
+    "@lumino/coreutils": "^1.11.0"
   },
   "devDependencies": {
     "@jupyterlab/builder": "^3.2.8",
@@ -64,6 +68,7 @@
   "jupyterlab": {
     "extension": true,
     "outputDir": "jupyterlab-mathjax3-web/labextension",
+    "schemaDir": "schema",
     "disabledExtensions": [
       "@jupyterlab/mathjax2-extension:plugin",
       "@jupyterlab/mathjax3-extension:plugin"
