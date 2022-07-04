@@ -1,4 +1,3 @@
-// Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
 import { JupyterFrontEndPlugin, JupyterFrontEnd } from '@jupyterlab/application';
@@ -22,6 +21,7 @@ export class MathJax3Typesetter implements ILatexTypesetter {
    * Only open the tex config access to the users.
    */
   private _texConfig: ReadonlyPartialJSONObject = null;
+  private _typesetPromise: Promise<any> = null;
   private _initPromise = new PromiseDelegate<void>();
   private _url = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
 
@@ -29,7 +29,10 @@ export class MathJax3Typesetter implements ILatexTypesetter {
    * Typeset the math in a node.
    */
   public typeset(node: HTMLElement): void {
-    void this._initPromise.promise.then(() => window.MathJax.typesetPromise([node]));
+    window.MathJax.texReset([0])
+    this._typesetPromise = this._typesetPromise.then(() => {
+      return window.MathJax.typesetPromise([node]);
+    })
   }
 
   set config(config: ReadonlyPartialJSONObject) {
@@ -50,6 +53,7 @@ export class MathJax3Typesetter implements ILatexTypesetter {
     script.addEventListener('load', () => {
       this._initPromise.resolve();
     });
+    this._typesetPromise = this._initPromise.promise;
     head.appendChild(script);
   }
 }
