@@ -40,7 +40,7 @@ For a full list configurable options under `tex`, please refer to [MathJax's web
 
 To configure your `tex` options, open **Setting -> MathJax 3 Config...** This will open the **Advanced Settings** page of JupyterLab. There you will find a **MathJax 3 Config** entry. The **System Defaults** JSON file will be
 
-```json
+```json5
 {
     "displayMath": [
         [
@@ -74,7 +74,7 @@ You may edit with the **User Preferences** JSON file according to [MathJax's `te
 
 As an example, you can add macros and tagging with
 
-```json
+```json5
 {
     "macros": {
         R: "\\mathbb{R}", 
@@ -116,7 +116,7 @@ $\require{physics} \dv{f}{x}$
 
 Do not try to include any extension via the `tex` configuration. Instead just use the commands or load-and-include via `\require`.
 
-```json
+```json5
 {
     // wrong!
     "packages": {"[+]": ["enclose", "color"]}
